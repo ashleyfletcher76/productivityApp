@@ -17,3 +17,13 @@ make logs
 ```bash
 make clean
 ```
+
+#SQL commmands for H2 console
+* Insert a user
+```bash
+INSERT INTO users (username, password) VALUES ('test', 'test');
+```
+* View all users in db
+```bash
+SELECT * FROM users;
+```

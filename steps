@@ -1,0 +1,26 @@
+Steps:
+* Create repo with basic structure-- done
+* Write an ideas page -- begun/done
+* Create a docker compose and Dockerfiles(leave empty for now)
+* Create spring boot zip files -- and imported into project -- done
+* Create basic Makefile -- done
+
+------
+
+* Create a basic Dockerfile that applies to both -- we build and run containers -- done
+* Create the docker compose structure -- env can be injected after -- done
+* Run first docker compose -- check works -- no health checks for now -- works and done
+* Add .gitignore to root -- done
+
+------
+
+* Set up as multi module for intellij simplicity -- no shared dependencies, pure microservices
+* Create simple GET request inside each service
+* application.properties update to separate the port numbers
+
+-----
+
+* Endpoint for user registration -- no auth needed -- done
+* H2 enabled at the moment -- yes
+* Service, repository, dto has been created -- done
+* Entity created -- done

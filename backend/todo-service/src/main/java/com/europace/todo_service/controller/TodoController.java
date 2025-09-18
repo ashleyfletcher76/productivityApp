@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class TodoController {
 
     @GetMapping("/")
-    public String hello() {
-        return "Hello";
+    public String health() {
+        return "Health";
     }
+
+
 }
