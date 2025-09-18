@@ -9,14 +9,20 @@ Steps:
 
 ------
 
+* Create a basic Dockerfile that applies to both -- we build and run containers -- done
+* Create the docker compose structure -- env can be injected after -- done
+* Run first docker compose -- check works -- no health checks for now -- works and done
+* Add .gitignore to root -- done
 
 Thoughts:
+* Use Java -- most familiar at this moment
 * No need for a full frontend -- no framework etc -- can just use static files
 * For simplicity when building we could use a Makefile -- docs must include how run the compose file
 * Begin with bonus, simpler to start with it
 * No need for spring security -- could add config issues -- keep basic and stick to task
 * Dependencies ?? Web, Validation, JPA and H2
 * Update the README as we go  to keep track or curl/postman possibilities
+* Do I prebuild the gradle or allow the dockerfile to build it? Not sure
 
 
 Key Points:

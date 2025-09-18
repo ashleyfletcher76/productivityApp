@@ -1,4 +1,6 @@
-DOCKER_COMPOSE = docker-compose -f docker/docker-compose.yaml
+PROJECT ?= europace
+
+DOCKER_COMPOSE = docker-compose -f docker/docker-compose.yaml -p $(PROJECT)
 
 up:
 	$(DOCKER_COMPOSE) up -d
@@ -7,7 +9,11 @@ down:
 	$(DOCKER_COMPOSE) down
 
 build-up:
-	$(DOCKER_COMPOSE) build up
+	$(DOCKER_COMPOSE) build
+	$(DOCKER_COMPOSE) up -d
+
+clean:
+	$(DOCKER_COMPOSE) down -v --remove-orphans
 
 re: down up
 
