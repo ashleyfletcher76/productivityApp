@@ -10,4 +10,4 @@ public record UserRequest(
         @NotBlank
         @Size(min = 2, max = 20)
         String password
-) { }
+) {}

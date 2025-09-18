@@ -15,12 +15,12 @@ public class User {
     @Column(nullable = false, unique = false, length = 10)
     private String password;
 
+    public User() {}
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
-
-    public User() {}
 
     public void setId(Long id) {
         this.id = id;

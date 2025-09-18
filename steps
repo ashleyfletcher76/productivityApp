@@ -1,4 +1,4 @@
-Steps:
+Steps in each git push:
 * Create repo with basic structure-- done
 * Write an ideas page -- begun/done
 * Create a docker compose and Dockerfiles(leave empty for now)
@@ -24,3 +24,9 @@ Steps:
 * H2 enabled at the moment -- yes
 * Service, repository, dto has been created -- done
 * Entity created -- done
+
+-----
+
+* Todo service implemented mostly -- done
+* Keep simple and no token yet -- done
+* Entity created alongside all other set up for service -- done

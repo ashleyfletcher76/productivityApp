@@ -8,10 +8,13 @@ Thoughts:
 * Update the README as we go  to keep track or curl/postman possibilities
 * Do I prebuild the gradle or allow the dockerfile to build it? Not sure
 * Keep H2 console or not -- security rish
+* No frontend stated in task -- stick to task
+* Maybe return dto in in todo get all
 
 
 Key Points:
 * Keep simple
+* No frontend -- rely on postman or curl
 * Microservices - Both services to be containerized
 * No need to hash password
 * Use spring boot
