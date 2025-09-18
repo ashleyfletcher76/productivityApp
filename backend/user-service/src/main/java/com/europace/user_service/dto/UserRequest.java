@@ -3,7 +3,7 @@ package com.europace.user_service.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record RegisterRequest(
+public record UserRequest(
         @NotBlank
         @Size(min = 3, max = 10)
         String username,
