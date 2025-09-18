@@ -1,10 +1,10 @@
-package com.europace.todo_service.controller;
+package com.europace.user_service.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TodoController {
+public class UserController {
 
     @GetMapping("/")
     public String hello() {
