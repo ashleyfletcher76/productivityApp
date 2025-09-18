@@ -10,6 +10,7 @@ Thoughts:
 * Keep H2 console or not -- security rish
 * No frontend stated in task -- stick to task
 * Maybe return dto in in todo get all
+* Returning dto doesn't work of course -- need to send all Todo entities
 
 
 Key Points:
