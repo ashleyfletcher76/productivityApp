@@ -1,0 +1,31 @@
+
+
+Steps:
+* Create repo with basic structure-- done
+* Write an ideas page -- begun/done
+* Create a docker compose and Dockerfiles(leave empty for now)
+* Create spring boot zip files -- and imported into project -- done
+* Create basic Makefile -- done
+
+------
+
+
+Thoughts:
+* No need for a full frontend -- no framework etc -- can just use static files
+* For simplicity when building we could use a Makefile -- docs must include how run the compose file
+* Begin with bonus, simpler to start with it
+* No need for spring security -- could add config issues -- keep basic and stick to task
+* Dependencies ?? Web, Validation, JPA and H2
+* Update the README as we go  to keep track or curl/postman possibilities
+
+
+Key Points:
+* Keep simple
+* Microservices - Both services to be containerized
+* No need to hash password
+* Use spring boot
+* Keep documentation
+* Token should include data identifying the user
+* User must include token in header
+* Basic error responses
+* BONUS -- use H2 database and add basic test -- integration or unit tests
