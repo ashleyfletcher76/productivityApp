@@ -48,3 +48,6 @@ Steps in each git push:
 * Correct the Client url path -- user service -- done
 
 ----
+
+* Last updates to readme and docker compose -- done
+* Push last update and then check once more -- done

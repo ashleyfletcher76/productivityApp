@@ -1,35 +1,28 @@
 # Europace Todo App
+Two Spring Boot microservices that work together:
+- **user-service**: register, login, token verification
+- **todo-service**: manage todos for authenticated users
 
-# Project prerequisites
-* The following tools are needed, either install through their websites or alternatively through homebrew, homebrew can be downloaded from here:
+For note, there is a docs directory with two files, `ideas.txt` and `steps.txt`. This is an idea into my though process throughout the challenge and also the steps I generally took between each commit.
+
+## Project prerequisites
+* The following tools are needed, either install through their websites or 
+    alternatively through homebrew, homebrew can be downloaded from here:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
 ```
-* `Make` - Build automation tool. [Install guide](https://www.gnu.org/software/make/)
+* Then install these:
 ```bash
-brew install make
-```
-* `Docker` - Containerization platform. [Install guide](https://docs.docker.com/get-docker/)
-```bash
-brew install docker
-```
-* `Postman` - API testing tool. [Download](https://www.postman.com/downloads/)
-```bash
+brew install make docker curl
 brew install --cask postman
 ```
+* `Make` - Build automation tool. [Install guide](https://www.gnu.org/software/make/)
+* `Docker` - Containerization platform. [Install guide](https://docs.docker.com/get-docker/)
+* `Postman` - API testing tool. [Download](https://www.postman.com/downloads/)
 * `Curl` - Command-line tool for HTTP requests. [Install guide](https://curl.se/download.html)
-```bash
-brew install curl 
-```
 
-**Environment variables**
-* Due to this being a practice project, the environment variables are available in this README.md, in normal circumstances this would not be allowed.
-* Please create an env file within the docker directory either via the terminal with:
-```bash
-touch .env
-```
-* or use your IDE.
-* Paste the following values into the `.env` file:
+## Environment variables
+* For simplicity in this challenge, variables are stored in .env inside the docker directory:
 ```bash
 SPRING_DATASOURCE_URL_USER=jdbc:h2:mem:testdb
 SPRING_DATASOURCE_USERNAME_USER=useruser
@@ -43,84 +36,82 @@ SERVER_PORT_TODO=8082
 USER_SERVICE_BASE_URL=http://user-service:8081 
 ```
 
-# Important commands to build project with `Make`
-* Build and begin project
+## Run with Make
+* Build and begin project from root directory level
 ```bash
-make build-up
-```
-* Stop containers running
-```bash
-make down
-```
-* Check docker logs
-```bash
-make logs
-```
-* Remove docker files
-```bash
-make clean
+make build-up   # build and start
+make down       # stop containers
+make logs       # follow logs
+make clean      # remove docker files
 ```
 
-# Important commands to build project through docker
-* Build and begin project
+## Run with Docker Compose
+* Build and begin project from root directory level
 ```bash
 docker-compose -f docker/docker-compose.yaml -p europace build
-```
-```bash
 docker-compose -f docker/docker-compose.yaml -p europace up -d
-```
-* Stop containers running
-```bash
 docker-compose -f docker/docker-compose.yaml -p europace down
-```
-* Check docker logs
-```bash
 docker-compose -f docker/docker-compose.yaml -p europace logs -f
-```
-* Remove docker files
-```bash
 docker-compose -f docker/docker-compose.yaml -p europace down -v --remove-orphans
 ```
 
-# Application process for Postman
-**Register user**
-* Create a new POST request and enter this URL and the following json as the body in raw selection(JSON)
-```bash
-http://localhost:8081/register
-```
+## Example API flow
+**Register**
+* Postman: POST http://localhost:8081/register
+* Body:
 ```json
 {"username": "David", "password": "password"}
 ```
-
-**Login user**
-* Create a new POST request and enter this URL and the following json as the body in raw selection(JSON)
+* Curl:
 ```bash
-http://localhost:8081/login
+curl -X POST http://localhost:8081/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"David","password":"password"}' 
 ```
+
+**Login**
+* Postman: POST http://localhost:8081/login
+* Body:
 ```json
 {"username": "David", "password": "password"}
 ```
-
-**Todo process**
-* Create a new POST request and enter this URL and the following json as the body in raw selection(JSON). Go to `Authorization` selection and choose Bearer Token and in the corresponding box, take the token from previous login request. 
+* Curl:
 ```bash
-http://localhost:8082/todos
+curl -X POST http://localhost:8081/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"David","password":"password"}'
 ```
+* Response:
+```json
+{"token": "your-token-here"}
+```
+
+**Add todo**
+* Postman: POST http://localhost:8082/todos
+* Auth: Bearer Token (use token from login)
+* Body:
 ```json
 {"title": "Swim", "description": "Go swimming on tuesday", "finishBy": "2024-06-15"}
 ```
-
-* Create a new GET request and enter this URL. Go to `Authorization` selection and choose Bearer Token and in the corresponding box, take the token from previous login request.
+* Curl:
 ```bash
-http://localhost:8082/todos
+curl -X POST http://localhost:8082/todos \
+  -H "Authorization: Bearer your-token-here" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Swim","description":"Go swimming","finishBy":"2024-06-15"}' 
 ```
 
-#SQL commands for H2 console
-* Insert a user
+**Get todos**
+* Postman: GET http://localhost:8082/todos
+* Auth: Bearer Token (use token from login)
+* Curl:
 ```bash
-INSERT INTO users (username, password) VALUES ('test', 'test');
+curl -X GET http://localhost:8082/todos \
+  -H "Authorization: Bearer your-token-here"
 ```
-* View all users in db
-```bash
-SELECT * FROM users;
-```
+
+## Notes on responses
+* 401 Unauthorized -> Missing or invalid token (handled by requireAuth)
+* 403 Forbidden -> Would apply if a user accessed another user’s resource. Since this app only exposes “my todos” endpoints, 403 does not occur in practice
+* 200 OK -> Successful request
+* 201 Created -> Post request successfully
