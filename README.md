@@ -22,6 +22,27 @@ brew install --cask postman
 brew install curl 
 ```
 
+**Environment variables**
+* Due to this being a practice project, the environment variables are available in this README.md, in normal circumstances this would not be allowed.
+* Please create an env file within the docker directory either via the terminal with:
+```bash
+touch .env
+```
+* or use your IDE.
+* Paste the following values into the `.env` file:
+```bash
+SPRING_DATASOURCE_URL_USER=jdbc:h2:mem:testdb
+SPRING_DATASOURCE_USERNAME_USER=useruser
+SPRING_DATASOURCE_PASSWORD_USER=pwuser
+SERVER_PORT_USER=8081
+
+SPRING_DATASOURCE_URL_TODO=jdbc:h2:mem:testdb
+SPRING_DATASOURCE_USERNAME_TODO=usertodo
+SPRING_DATASOURCE_PASSWORD_TODO=pwtodo
+SERVER_PORT_TODO=8082
+USER_SERVICE_BASE_URL=http://user-service:8081 
+```
+
 # Important commands to build project with `Make`
 * Build and begin project
 ```bash

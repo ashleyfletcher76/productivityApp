@@ -40,3 +40,11 @@ Steps in each git push:
 * Created a basic authentication system without full spring security -- done
 * Todo service port and database configured -- done
 * Authentication working -- done
+
+----
+
+* Review all of the status codes etc, make sure simple and accurate -- done
+* Inject values from docker compose, subsequently add a .env, post to README.md -- done
+* Correct the Client url path -- user service -- done
+
+----

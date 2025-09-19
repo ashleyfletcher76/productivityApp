@@ -3,8 +3,9 @@ package com.europace.user_service.service;
 import com.europace.user_service.dto.UserRequest;
 import com.europace.user_service.entity.User;
 import com.europace.user_service.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import com.europace.user_service.exception.BadRequestException;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,24 +21,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(UserRequest request) throws BadRequestException {
-        if (userRepository.existsByUsername(request.username())) {
-            throw new BadRequestException("Username is already taken");
-        }
+    public void registerUser(UserRequest request) {
+        if (userRepository.existsByUsername(request.username()))
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username is already taken");
 
         userRepository.save(new User(request.username(), request.password()));
     }
 
     @Override
-    public String loginUser(UserRequest request) throws BadRequestException {
-        if (!userRepository.existsByUsername(request.username())) {
-            throw new BadRequestException("User cannot be found");
-        }
-
+    public String loginUser(UserRequest request) {
         User user = userRepository.findByUsername(request.username());
 
-        if (!request.password().equals(user.getPassword()))
-            throw new BadRequestException("Password is incorrect. Try again!");
+        if (user == null || !request.password().equals(user.getPassword()))
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
 
         return tokenService.issue(user.getUsername());
     }

@@ -1,9 +1,12 @@
 package com.europace.todo_service.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public record TodoDto(
-        String title,
-        String description,
+        @NotBlank @Size(max=120) String title,
+        @NotBlank @Size(max=120) String description,
         LocalDate finishBy
 ) {}

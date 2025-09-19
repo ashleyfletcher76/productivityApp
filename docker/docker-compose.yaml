@@ -3,8 +3,13 @@ services:
   user-service:
     build: ./../backend/user-service
     container_name: user-service
+    environment:
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL_USER}
+      - SPRING_DATASOURCE_USERNAME_USER=${SPRING_DATASOURCE_USERNAME_USER}
+      - SPRING_DATASOURCE_PASSWORD_USER=${SPRING_DATASOURCE_PASSWORD_USER}
+      - SERVER_PORT_USER=${SERVER_PORT_USER}
     healthcheck:
-      test: [ "CMD-SHELL", "curl -k -f http://localhost:8080/health/ || exit 1" ]
+      test: [ "CMD-SHELL", "curl -k -f http://localhost:8081/health/ || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -14,8 +19,14 @@ services:
   todo-service:
     build: ./../backend/todo-service
     container_name: todo-service
+    environment:
+      - SPRING_DATASOURCE_URL_TODO=${SPRING_DATASOURCE_URL_TODO}
+      - SPRING_DATASOURCE_USERNAME_TODO=${SPRING_DATASOURCE_USERNAME_TODO}
+      - SPRING_DATASOURCE_PASSWORD_TODO=${SPRING_DATASOURCE_PASSWORD_TODO}
+      - SERVER_PORT_TODO=${SERVER_PORT_TODO}
+      - USER_SERVICE_BASE_URL=${USER_SERVICE_BASE_URL}
     healthcheck:
-      test: [ "CMD-SHELL", "curl -k -f http://localhost:8080/health/ || exit 1" ]
+      test: [ "CMD-SHELL", "curl -k -f http://localhost:8082/health/ || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5

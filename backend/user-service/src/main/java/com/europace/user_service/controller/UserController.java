@@ -4,7 +4,6 @@ import com.europace.user_service.dto.UserRequest;
 import com.europace.user_service.service.TokenService;
 import com.europace.user_service.service.UserService;
 import jakarta.validation.Valid;
-import com.europace.user_service.exception.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,23 +26,15 @@ public class UserController {
     public String health() { return "Ok"; }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRequest userRequest) throws BadRequestException {
-        try {
-            userService.registerUser(userRequest);
-            return ResponseEntity.status(HttpStatus.CREATED).body("User register successfully");
-        } catch (BadRequestException e) {
-            throw new BadRequestException("Bad Request for user registration");
-        }
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRequest userRequest) {
+        userService.registerUser(userRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body("User register successfully");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse> loginUser(@Valid @RequestBody UserRequest userRequest) throws BadRequestException {
-        try {
-            String token = userService.loginUser(userRequest);
-            return ResponseEntity.ok(new TokenResponse(token));
-        } catch (BadRequestException e) {
-            throw new BadRequestException("Bad Request for user log in");
-        }
+    public ResponseEntity<TokenResponse> loginUser(@Valid @RequestBody UserRequest userRequest) {
+        String token = userService.loginUser(userRequest);
+        return ResponseEntity.ok(new TokenResponse(token));
     }
 
     @PostMapping("/token")
