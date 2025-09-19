@@ -51,3 +51,8 @@ Steps in each git push:
 
 * Last updates to readme and docker compose -- done
 * Push last update and then check once more -- done
+
+----
+
+* Last security update on password -- done
+* Check the docker healthcecker is working -- done

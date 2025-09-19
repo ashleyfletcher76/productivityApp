@@ -3,7 +3,18 @@ Two Spring Boot microservices that work together:
 - **user-service**: register, login, token verification
 - **todo-service**: manage todos for authenticated users
 
-For note, there is a docs directory with two files, `ideas.txt` and `steps.txt`. This is an idea into my though process throughout the challenge and also the steps I generally took between each commit.
+For note, there is a docs directory with two files, `ideas.txt` and `steps.txt`. This is an idea into my thought process throughout the challenge and also the steps I generally took between each commit.
+
+## Security
+- **Auth model:** Opaque UUID tokens issued by `user-service` on `/login`, verified by `todo-service` on each request via `POST /token`
+- **Where tokens live:** In-memory `ConcurrentHashMap` inside `user-service`, simple and thread-safe for this task
+- **Request auth:** Clients must send `Authorization: Bearer <token>` to `todo-service`. Missing/invalid → **401**
+- **Data access:** `GET /todos` is scoped to the authenticated user (derived from token). No cross user access, so **403** cannot occur
+- **Passwords:** Plain text no hashing. Username/password length validated via `@Valid` annotation
+- **Service-to-service call:** `todo-service` uses a `RestClient` to call `user-service`
+
+* Note password length must be 5 characters, with at least one uppercase, one lowercase, one digit and one special character. Usually we would make this longer but for the purpose of this task/challenge its been kept shorter.
+- Special chars == `@$!%*?&`
 
 ## Project prerequisites
 * The following tools are needed, either install through their websites or 
@@ -60,26 +71,26 @@ docker-compose -f docker/docker-compose.yaml -p europace down -v --remove-orphan
 * Postman: POST http://localhost:8081/register
 * Body:
 ```json
-{"username": "David", "password": "password"}
+{"username": "David", "password": "pass1!A"}
 ```
 * Curl:
 ```bash
 curl -X POST http://localhost:8081/register \
   -H "Content-Type: application/json" \
-  -d '{"username":"David","password":"password"}' 
+  -d '{"username":"David","password":"pass1!A"}' 
 ```
 
 **Login**
 * Postman: POST http://localhost:8081/login
 * Body:
 ```json
-{"username": "David", "password": "password"}
+{"username": "David", "password": "pass1!A"}
 ```
 * Curl:
 ```bash
 curl -X POST http://localhost:8081/login \
   -H "Content-Type: application/json" \
-  -d '{"username":"David","password":"password"}'
+  -d '{"username":"David","password":"pass1!A"}'
 ```
 * Response:
 ```json
