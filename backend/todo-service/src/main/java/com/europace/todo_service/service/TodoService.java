@@ -6,7 +6,7 @@ import com.europace.todo_service.entity.Todo;
 import java.util.List;
 
 public interface TodoService {
-    void postTodo(TodoDto dto);
+    void postTodo(String username, TodoDto dto);
 
-    List<Todo> getAllTodos();
+    List<Todo> getAllTodos(String username);
 }

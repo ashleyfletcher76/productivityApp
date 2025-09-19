@@ -16,12 +16,12 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public void postTodo(TodoDto dto) {
-        repository.save(new Todo(dto.title(), dto.description(), dto.finishBy()));
+    public void postTodo(String username, TodoDto dto) {
+        repository.save(new Todo(username, dto.title(), dto.description(), dto.finishBy()));
     }
 
     @Override
-    public List<Todo> getAllTodos() {
-        return repository.findAll();
+    public List<Todo> getAllTodos(String username) {
+        return repository.findByUsername(username);
     }
 }

@@ -30,3 +30,13 @@ Steps in each git push:
 * Todo service implemented mostly -- done
 * Keep simple and no token yet -- done
 * Entity created alongside all other set up for service -- done
+
+-----
+
+* Add health checker to docker compose -- done but not tested(internet problems)
+
+-----
+
+* Created a basic authentication system without full spring security -- done
+* Todo service port and database configured -- done
+* Authentication working -- done

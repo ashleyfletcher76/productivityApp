@@ -54,7 +54,7 @@ public class UserController {
                         .body(new TokenVerifyResponse(false, null)));
     }
 
-    record TokenResponse(String token) {}
-    record TokenRequest(String token) {}
-    record TokenVerifyResponse(boolean valid, String username) {}
+    public record TokenResponse(String token) {}
+    public record TokenRequest(String token) {}
+    public record TokenVerifyResponse(boolean valid, String username) {}
 }

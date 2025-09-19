@@ -12,6 +12,9 @@ public class Todo {
     private Long id;
 
     @Column(nullable = false)
+    private String username;
+
+    @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
@@ -26,10 +29,11 @@ public class Todo {
     public Todo() {}
 
     public Todo(
-            String title,
+            String username, String title,
             String description,
             LocalDate finishBy
     ) {
+        this.username = username;
         this.title = title;
         this.description = description;
         this.finishBy = finishBy;
@@ -79,5 +83,13 @@ public class Todo {
     protected void onCreate() {
         if (createdAt == null)
             createdAt = LocalDate.now();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
