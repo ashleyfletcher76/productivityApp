@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -35,6 +36,16 @@ public class TodoController {
     public ResponseEntity<List<Todo>> getAllTodos(Authentication authentication) {
         String username = authentication.getName();
         List<Todo> todos = service.getAllTodos(username);
+        return ResponseEntity.ok(todos);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Todo>> getTodos(
+            Authentication authentication,
+            @RequestParam String name) {
+        if (!name.equals(authentication.getName()))
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        List<Todo> todos = service.getAllTodos(name);
         return ResponseEntity.ok(todos);
     }
 }

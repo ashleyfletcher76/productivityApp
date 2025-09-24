@@ -24,4 +24,9 @@ public class TodoServiceImpl implements TodoService {
     public List<Todo> getAllTodos(String username) {
         return repository.findByUsername(username);
     }
+
+    @Override
+    public List<Todo> getTodos(String username) {
+        return repository.findByUsername(username);
+    }
 }

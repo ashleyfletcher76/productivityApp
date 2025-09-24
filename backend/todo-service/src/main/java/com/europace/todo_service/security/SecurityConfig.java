@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/todos/health").permitAll()
                         .requestMatchers("/error").permitAll()
-                        .requestMatchers("/todos").authenticated()
+                        .requestMatchers("/todos/**").authenticated()
                         .anyRequest().denyAll()
                 )
                 .addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class)
