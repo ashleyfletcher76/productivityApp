@@ -14,11 +14,26 @@ public class TokenServiceImpl implements TokenService {
 
     public String issue(String username) {
         String token = UUID.randomUUID().toString();
-        tokenMap.put(token, username);
+        tokenMap.put(username, token);
         return token;
     }
 
     public Optional<String> verify(String token) {
-        return Optional.ofNullable(tokenMap.get(token));
+        return tokenMap
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().equals(token))
+                .map(Map.Entry::getKey)
+                .findFirst();
     }
+
+//    public String issue(String username) {
+//        String token = UUID.randomUUID().toString();
+//        tokenMap.put(token, username);
+//        return token;
+//    }
+
+//    public Optional<String> verify(String token) {
+//        return Optional.ofNullable(tokenMap.get(token));
+//    }
 }
