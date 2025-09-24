@@ -1,0 +1,17 @@
+##Access H2 console
+* jdbc:h2:file:/data/tododb | jdbc:h2:file:/data/userdb
+
+##Insert user from H2
+* INSERT INTO users (username, password)
+  VALUES ('test', 'Abcde1!');
+
+* INSERT INTO todo (username, title, description, finish_by, created_at)
+  VALUES ('test', 'Go running', ' Have fun', DATE '2025-10-01', CURRENT_DATE);
+
+  SELECT * FROM todo;
+
+##Select all
+* SELECT * FROM users; | SELECT * FROM todo;
+
+##Stop container
+* docker stop <container-name>

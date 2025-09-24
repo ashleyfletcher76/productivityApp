@@ -13,6 +13,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    volumes:
+      - user-db-data:/data
     ports:
       - "8081:8081"
 
@@ -30,5 +32,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    volumes:
+      - todo-db-data:/data
     ports:
       - "8082:8082"
+
+volumes:
+  user-db-data:
+  todo-db-data:

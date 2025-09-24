@@ -17,7 +17,9 @@ clean:
 
 re: down up
 
+re-new: clean build-up
+
 logs:
 	$(DOCKER_COMPOSE) logs -f
 
-.PHONY: up down build-up re logs
+.PHONY: up down build-up re re-new logs
