@@ -7,3 +7,8 @@ docker logs todo-service | grep 'Tomcat started on port'
 ```bash
 docker stop [container-name]
 ```
+
+**Open container**
+```bash
+docker exec -it user-service bash
+```
