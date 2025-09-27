@@ -27,6 +27,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD_TODO=${SPRING_DATASOURCE_PASSWORD_TODO}
       - SERVER_PORT_TODO=${SERVER_PORT_TODO}
       - USER_SERVICE_BASE_URL=${USER_SERVICE_BASE_URL}
+    depends_on:
+      - user-service
     healthcheck:
       test: [ "CMD-SHELL", "curl -k -f http://localhost:8082/todos/health || exit 1" ]
       interval: 10s
