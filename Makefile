@@ -1,4 +1,4 @@
-PROJECT ?= europace
+PROJECT ?= productivity-app
 
 DOCKER_COMPOSE = docker-compose -f docker/docker-compose.yaml -p $(PROJECT)
 
