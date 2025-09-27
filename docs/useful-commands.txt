@@ -1,3 +1,18 @@
+**Check port number for container**
+```bash
+docker logs todo-service | grep 'Tomcat started on port'
+```
+
+**Stop container running**
+```bash
+docker stop [container-name]
+```
+
+**Open container**
+```bash
+docker exec -it user-service bash
+```
+
 ##Access H2 console
 * jdbc:h2:file:/data/tododb | jdbc:h2:file:/data/userdb
 
