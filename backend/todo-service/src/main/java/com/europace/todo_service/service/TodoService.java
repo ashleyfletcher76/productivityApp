@@ -9,6 +9,4 @@ public interface TodoService {
     void postTodo(String username, TodoDto dto);
 
     List<Todo> getAllTodos(String username);
-
-    List<Todo> getTodos(String username);
 }
