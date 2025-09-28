@@ -33,7 +33,7 @@ class AuthControllerTest {
     @Test
     void rootWhenAuthenticated_thenSaysHelloUser() throws Exception {
         MvcResult result = this.mvc.perform(post("/token")
-                .with(httpBasic("admin", " adminone")))
+                .with(httpBasic("admin", "adminone")))
                 .andExpect(status().isOk())
                 .andReturn();
 

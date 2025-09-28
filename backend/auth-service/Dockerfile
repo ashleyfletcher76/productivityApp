@@ -12,8 +12,6 @@ RUN ./gradlew bootJar --no-daemon -x test
 
 FROM eclipse-temurin:21-jre
 
-RUN mkdir -p /data
-
 COPY --from=build /workspace/build/libs/*.jar /app.jar
 
 ENTRYPOINT ["java", "-jar", "/app.jar"]

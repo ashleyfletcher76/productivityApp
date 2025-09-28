@@ -42,10 +42,12 @@ services:
   auth-service:
     build: ./../backend/auth-service
     container_name: auth-service
+    environment:
+      - SERVER_PORT_AUTH=${SERVER_PORT_AUTH}
     depends_on:
       - user-service
     healthcheck:
-      test: [ "CMD-SHELL", "curl -k -f http://localhost:8083/todos/health || exit 1" ]
+      test: [ "CMD-SHELL", "curl -k -f http://localhost:8083/health || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
