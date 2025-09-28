@@ -4,7 +4,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
-group = "com.europace"
+group = "productivity"
 version = "0.0.1-SNAPSHOT"
 description = "Manages todos for authenticated users in todo app"
 
