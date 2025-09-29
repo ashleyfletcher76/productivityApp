@@ -1,4 +1,4 @@
-rootProject.name = "europace-todo"
+rootProject.name = "productivity-one"
 
 include("backend:user-service")
 include("backend:todo-service")
