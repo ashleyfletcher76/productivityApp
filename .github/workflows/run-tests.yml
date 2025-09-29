@@ -17,6 +17,23 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: gradle
+      - name: Prepare test RSA keys for auth-service
+        if: matrix.module == 'backend/auth-service'
+        env:
+          TEST_PRIVATE_PEM: ${{ secrets.TEST_PRIVATE_PEM }}
+          TEST_PUBLIC_PEM: ${{ secrets.TEST_PUBLIC_PEM }}
+        run: |
+          cd backend/auth-service/src/test/resources || (mkdir -p backend/auth-service/src/test/resources && cd $_)
+          if [ -n "$TEST_PRIVATE_PEM" ] && [ -n "$TEST_PUBLIC_PEM" ]; then
+            printf '%s\n' "$TEST_PRIVATE_PEM" > private.pem
+            printf '%s\n' "$TEST_PUBLIC_PEM"  > public.pem
+          else
+            openssl genrsa -out keypair.pem 2048
+            openssl rsa -in keypair.pem -pubout -out public.pem
+            openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in keypair.pem -out private.pem
+            rm -f keypair.pem
+          fi
+          chmod 600 private.pem
       - name: Make gradlew executable
         working-directory: ${{ matrix.module }}
         run: chmod +x ./gradlew
