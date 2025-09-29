@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/health", "/.well-known/jwks.json").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .httpBasic(Customizer.withDefaults())
@@ -65,6 +66,7 @@ public class SecurityConfig {
         JWK jwk = new RSAKey
                 .Builder(rsaKeyProperties.publicKey())
                 .privateKey(rsaKeyProperties.privateKey())
+                .keyID("v1")
                 .build();
 
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));

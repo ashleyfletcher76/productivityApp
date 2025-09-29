@@ -23,15 +23,15 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public String generateToken(Authentication auth) {
         Instant now = Instant.now();
-        String scope = auth.getAuthorities().stream()
+        String role = auth.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" "));
         JwtClaimsSet claimsSet = JwtClaimsSet.builder()
-                .issuer("self")
+                .issuer("auth-service")
                 .issuedAt(now)
                 .expiresAt(now.plus(1, ChronoUnit.HOURS))
                 .subject(auth.getName())
-                .claim("scope", scope)
+                .claim("role", role)
                 .build();
         return this.jwtEncoder.encode(JwtEncoderParameters.from(claimsSet)).getTokenValue();
     }

@@ -44,6 +44,7 @@ services:
     container_name: auth-service
     environment:
       - SERVER_PORT_AUTH=${SERVER_PORT_AUTH}
+      - SPRING_JWKS_URI=${SPRING_JWKS_URI}
     depends_on:
       - user-service
     healthcheck:
