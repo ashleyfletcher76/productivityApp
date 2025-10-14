@@ -1,7 +1,7 @@
 package productivity.auth_service.service;
 
-import org.springframework.security.core.Authentication;
+import productivity.auth_service.controller.AuthController.UserServiceResponse;
 
 public interface TokenService {
-    String generateToken(Authentication auth);
+  String generateToken(UserServiceResponse userServiceResponse);
 }

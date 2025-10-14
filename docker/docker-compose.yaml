@@ -8,6 +8,8 @@ services:
       - SPRING_DATASOURCE_USERNAME_USER=${SPRING_DATASOURCE_USERNAME_USER}
       - SPRING_DATASOURCE_PASSWORD_USER=${SPRING_DATASOURCE_PASSWORD_USER}
       - SERVER_PORT_USER=${SERVER_PORT_USER}
+      - SPRING_JWKS_URI=${SPRING_JWKS_URI}
+      - AUTH_SERVICE_ISSUER=${AUTH_SERVICE_ISSUER}
     healthcheck:
       test: [ "CMD-SHELL", "curl -k -f http://localhost:8081/health || exit 1" ]
       interval: 10s
@@ -27,6 +29,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD_TODO=${SPRING_DATASOURCE_PASSWORD_TODO}
       - SERVER_PORT_TODO=${SERVER_PORT_TODO}
       - USER_SERVICE_BASE_URL=${USER_SERVICE_BASE_URL}
+      - AUTH_SERVICE_ISSUER=${AUTH_SERVICE_ISSUER}
     depends_on:
       - user-service
     healthcheck:
@@ -44,6 +47,8 @@ services:
     container_name: auth-service
     environment:
       - SERVER_PORT_AUTH=${SERVER_PORT_AUTH}
+      - SPRING_JWKS_URI=${SPRING_JWKS_URI}
+      - AUTH_SERVICE_ISSUER=${AUTH_SERVICE_ISSUER}
     depends_on:
       - user-service
     healthcheck:

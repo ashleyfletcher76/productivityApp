@@ -1,4 +1,4 @@
-package productivity.todo_service.config;
+package productivity.auth_service.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

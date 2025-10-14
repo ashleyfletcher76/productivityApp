@@ -1,9 +1,10 @@
 package productivity.user_service.service;
 
 import productivity.user_service.dto.UserRequest;
+import productivity.user_service.dto.UserResponse;
 
 public interface UserService {
-    void registerUser(UserRequest request);
+  void registerUser(UserRequest request);
 
-    String loginUser(UserRequest request);
+  UserResponse checkLoginUser(UserRequest request);
 }

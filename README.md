@@ -45,6 +45,23 @@ SPRING_DATASOURCE_PASSWORD_TODO=pwtodo
 SERVER_PORT_TODO=8082
 USER_SERVICE_BASE_URL=http://user-service:8081
 ```
+* Alongside these env variables we need to create a public and private key for auth-service. So run the following commands:
+```bash
+# navigate to correct directory
+cd backend/auth-service/src/main/resources
+
+# create directory
+mkdir certs
+
+# create rsa key pair
+openssl genrsa -out keypair.pem 2048
+
+# extract public key
+openssl rsa -in keypair.pem -pubout -out public.pem
+
+# create private key in PKCS#8 format
+openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in keypair.pem -out private.pem 
+```
 ## Run with Make
 * Build and begin project from root directory level
 ```bash
