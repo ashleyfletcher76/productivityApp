@@ -16,8 +16,7 @@ public class User {
   @Column(nullable = false, unique = false, length = 20)
   private String password;
 
-  @Column(nullable = false)
-  private List<String> roles;
+  @ElementCollection private List<String> roles;
 
   public User() {}
 

@@ -41,7 +41,7 @@ public class TodoController {
   @GetMapping()
   public ResponseEntity<List<Todo>> getAllTodos(Authentication authentication) {
     String username = authentication.getName();
-    String roles = authentication.getDetails().toString();
+    String roles = authentication.getAuthorities().toString();
     LOG.info("Roles for user: {}", roles);
     List<Todo> todos = service.getAllTodos(username);
     return ResponseEntity.ok(todos);
