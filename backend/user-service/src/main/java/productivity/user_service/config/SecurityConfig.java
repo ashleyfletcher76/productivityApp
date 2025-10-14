@@ -1,4 +1,4 @@
-package productivity.todo_service.config;
+package productivity.user_service.config;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,10 +27,8 @@ public class SecurityConfig {
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(
             auth ->
-                auth.requestMatchers("/todos/health", "/error")
+                auth.requestMatchers("/health", "/error", "/register", "/check-login-user")
                     .permitAll()
-                    .requestMatchers("/todos/**")
-                    .authenticated()
                     .anyRequest()
                     .denyAll())
         .oauth2ResourceServer(
